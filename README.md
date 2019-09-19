@@ -134,5 +134,5 @@ npm run coverage
 
 If you have any trouble or have some suggestions, don't hesitate to either create a new issue, open a new pull request or just email me at <nguyenqviet98@gmail.com>. All feedbacks are welcomed.
 
-[basic-usage]: https://github.com/axblueblader/funlog/examples/basic-usage.js
-[example]: https://github.com/axblueblader/funlog/examples
+[basic-usage]: https://github.com/axblueblader/funlog/blob/master/examples/basic-usage.js
+[example]: https://github.com/axblueblader/funlog/tree/master/examples
