@@ -59,16 +59,7 @@ module.exports = function(...args) {
   let func = null;
   let obj = null;
   let options = {};
-  if (typeof args[0] === "function") {
-    func = args[0];
-  } else if (typeof args[0] === "object") {
-    obj = args[0];
-  } else {
-    console.error(
-      "[funlog] Error: First argument must be a function or object"
-    );
-    return null;
-  }
+
   if (args[1]) {
     if (typeof args[1] !== "object") {
       console.error("[funlog] Error: Second argument must be an object");
@@ -78,9 +69,16 @@ module.exports = function(...args) {
     }
   }
 
-  if (func !== null) {
+  if (typeof args[0] === "function") {
+    func = args[0];
     return wrapFunc(func, options);
-  } else if (obj !== null) {
+  } else if (typeof args[0] === "object") {
+    obj = args[0];
     return wrapObj(obj, options);
+  } else {
+    console.error(
+      "[funlog] Error: First argument must be a function or object"
+    );
+    return null;
   }
 };
