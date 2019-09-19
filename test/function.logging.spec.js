@@ -25,5 +25,15 @@ describe("Function logging feature", function() {
     spy.calledOnceWith(`${typeof float} : ${JSON.stringify(float)}`);
     spy.calledOnceWith(`${typeof arr} : ${JSON.stringify(arr)}`);
     spy.calledOnceWith(`${typeof obj} : ${JSON.stringify(obj)}`);
+    spy.restore();
+  });
+
+  it("should log anonymous function with assigned name", function() {
+    const res = funlog(() => {});
+    const spy = sinon.spy(console, "info");
+    const name = "Anonymous function";
+    res();
+    spy.calledOnceWith(`[funlog] called ${name}:`);
+    spy.restore();
   });
 });

@@ -12,7 +12,7 @@ function wrapFunc(func, options) {
   const postEx = options.postEx || "Output: ";
   return function(...args) {
     // Function name
-    const msg = `[funlog] called ${func.name}:`;
+    const msg = `[funlog] called ${func.name || "Anonymous function"}:`;
     log(logger, msg);
 
     // Input (arguments)
