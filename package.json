@@ -1,0 +1,39 @@
+{
+  "name": "funlog",
+  "version": "1.0.0",
+  "description": "A customizable function-foused logger: Log input, output and everything in between",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "mocha --recursive './test/*.spec.js'",
+    "coverage": "nyc nyc npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/axblueblader/funlog.git"
+  },
+  "author": "axblueblader <nguyenqviet98@gmail.com>",
+  "keywords": [
+    "dev",
+    "tool",
+    "function",
+    "logger",
+    "logging",
+    "input",
+    "ouput",
+    "io"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/axblueblader/funlog/issues"
+  },
+  "homepage": "https://github.com/axblueblader/funlog#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0",
+    "nyc": "^14.1.1",
+    "sinon": "^7.4.2"
+  }
+}

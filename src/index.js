@@ -35,13 +35,15 @@ function wrapFunc(func, options) {
 }
 
 function wrapObj(holder, options) {
-  holder.forEach(func => {
-    if (typeof func !== "function") {
-      return func;
+  const res = {};
+  Object.keys(holder).forEach(key => {
+    if (typeof holder[key] !== "function") {
+      res[key] = holder[key];
     } else {
-      return wrapFunc(func, options);
+      res[key] = wrapFunc(holder[key], options);
     }
   });
+  return res;
 }
 
 module.exports = function(...args) {
