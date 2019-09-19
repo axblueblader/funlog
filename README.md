@@ -107,10 +107,12 @@ A message to print after execution finished and before printing function output.
 
 ## Installation
 
-All depencies are specified in `package.json` file so
-
 ```
-npm install
+npm install funlog
+```
+In source code
+```js
+const funlog = require("funlog");
 ```
 
 is enough to get going.
