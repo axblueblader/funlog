@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "mocha --recursive './test/*.spec.js'",
-    "coverage": "nyc nyc npm run test"
+    "coverage": "nyc npm run test"
   },
   "repository": {
     "type": "git",
