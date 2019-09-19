@@ -2,7 +2,7 @@
 
 # Funlog
 
-A customizable function-foused Nodejs log wrapper: Log functions input, output and everything in between.
+A customizable function-focused Nodejs log wrapper: Log functions input, output and everything in between.
 
 ## Motivation
 

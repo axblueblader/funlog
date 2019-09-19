@@ -1,6 +1,6 @@
 {
   "name": "funlog",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A customizable function-foused logger: Log input, output and everything in between",
   "main": "index.js",
   "directories": {
