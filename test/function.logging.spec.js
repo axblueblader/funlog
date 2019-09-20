@@ -3,15 +3,24 @@ const sinon = require("sinon");
 const funlog = require("../src/index");
 
 describe("Function logging feature", function() {
+  let sandbox;
+  this.beforeEach(function() {
+    sandbox = sinon.createSandbox();
+  });
+
+  this.afterEach(function() {
+    sandbox.restore();
+  });
+
   it("should not change the function output", function() {
-    const func = sinon.fake.returns(0);
+    const func = sandbox.fake.returns(0);
     const res = funlog(func);
     expect(res()).to.be.equal(0);
   });
 
   it("should log arguments correctly", function() {
-    const func = sinon.fake.returns(0);
-    const spy = sinon.spy(console, "info");
+    const func = sandbox.fake.returns(0);
+    const spy = sandbox.spy(console, "info");
     const res = funlog(func);
     const num = 1;
     const string = "abc";
@@ -30,7 +39,7 @@ describe("Function logging feature", function() {
 
   it("should log anonymous function with assigned name", function() {
     const res = funlog(() => {});
-    const spy = sinon.spy(console, "info");
+    const spy = sandbox.spy(console, "info");
     const name = "Anonymous function";
     res();
     expect(spy.calledWith(`[funlog] called ${name}:`)).to.be.true;
@@ -39,22 +48,22 @@ describe("Function logging feature", function() {
 
   // Better to use basic assert for throws
   it("should throw exception", function() {
-    const func = sinon.fake.throws("Error");
+    const func = sandbox.fake.throws("Error");
     const res = funlog(func);
     assert.throws(res, "Error");
     assert.throws(func, "Error");
   });
 
   it("should not throw exception but only logs it", function() {
-    const func = sinon.fake.throws("Error");
-    const spy = sinon.spy(console, "error");
+    const func = sandbox.fake.throws("Error");
+    const spy = sandbox.spy(console, "error");
     const opts = {
       reThrowErr: false
     };
     const res = funlog(func, opts);
     assert.throw(func, "Error");
     expect(res()).to.be.null;
-    expect(spy.calledOnceWith("Error")).to.be.true;
+    expect(spy.calledOnce).to.be.true;
     spy.restore();
   });
 });

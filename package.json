@@ -14,10 +14,13 @@
     "type": "git",
     "url": "git+https://github.com/axblueblader/funlog.git"
   },
-  "author": "axblueblader <nguyenqviet98@gmail.com>",
+  "author": {
+    "name": "Nguyen Quoc Viet",
+    "email": "nguyenqviet98@gmail.com"
+  },
   "keywords": [
     "dev",
-    "tool",
+    "debug",
     "function",
     "logger",
     "logging",
@@ -25,7 +28,13 @@
     "ouput",
     "io"
   ],
-  "license": "ISC",
+  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  ],
   "bugs": {
     "url": "https://github.com/axblueblader/funlog/issues"
   },
@@ -36,5 +45,8 @@
     "nyc": "^14.1.1",
     "sinon": "^7.4.2",
     "winston": "^3.2.1"
+  },
+  "engines": {
+    "node": ">= 6.17.1"
   }
 }

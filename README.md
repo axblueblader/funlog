@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/axblueblader/funlog.svg?branch=master)](https://travis-ci.org/axblueblader/funlog)
+![node](https://img.shields.io/node/v/funlog)
+![npm](https://img.shields.io/npm/dm/funlog)
 
 # Funlog
 
@@ -11,6 +13,11 @@ I wrote some handler functions for API routes and wanted to automatically log ou
 ## Quick start
 
 Check out the [basic usage][basic-usage] and other examples in the [examples folder][example].
+All examples can be run using
+
+```
+node /path/to/example/file.js
+```
 
 ## Usage
 
@@ -39,6 +46,17 @@ const options = {
 }
 ```
 
+# Table of Contents
+
+1. [Motivation](#motivation)
+2. [Quick start](#quick-start)
+3. [Usage](#usage)
+4. [API](#api)
+5. [Installation](#installation)
+6. [Testing](#testing)
+7. [Future](#future)
+8. [Contributing](#contributing)
+
 ## API
 
 ### Constructor
@@ -59,15 +77,19 @@ It will return `null` in all other cases.
 
 - **options**: must be of type _object_
 
-  - Optional.
+  - Optional. All default options can be view in the [defaultOptions.js][default-options] file
 
 #### options
+
+Properties in the `options` are not currently checked for types and unknown ones are ignored.
 
 - [logger](#logger)
 - [log](#log)
 - [preEx](#preEx)
 - [durEx](#durEx)
 - [postEx](#postEx)
+- [logErr](#logErr)
+- [reThrowErr](#reThrowErr)
 
 #### logger
 
@@ -105,6 +127,24 @@ A message to print after execution finished and before printing function output.
 
 - Default value: `"Output: "`
 
+#### logErr
+
+A logging function specifically for exceptions. It needs to take in 2 parameters (logger,string). This function will be called for printing exceptions.
+
+- Default value:
+
+```js
+function(logger,message) {
+    logger.error(message);
+}
+```
+
+#### reThrowErr
+
+A boolean to indicate that the wrapper will rethrow any exceptions out or swallow them.
+
+- Default value: `true`
+
 ## Installation
 
 ```
@@ -134,9 +174,14 @@ or
 npm run coverage
 ```
 
+## Future
+
+Hopefully will add support for asynchronous functions, better formatting, customization abilities and better exception handling.
+
 ## Contributing
 
 If you have any trouble or have some suggestions, don't hesitate to either create a new issue, open a new pull request or just email me at <nguyenqviet98@gmail.com>. All feedbacks are welcomed.
 
 [basic-usage]: https://github.com/axblueblader/funlog/blob/master/examples/basic-usage.js
 [example]: https://github.com/axblueblader/funlog/tree/master/examples
+[default-options]: https://github.com/axblueblader/funlog/tree/master/src/defaultOptions.js

@@ -3,9 +3,18 @@ const sinon = require("sinon");
 const funlog = require("../src/index");
 
 describe("Use custom log function in options", function() {
+  let sandbox;
+  this.beforeEach(function() {
+    sandbox = sinon.createSandbox();
+  });
+
+  this.afterEach(function() {
+    sandbox.restore();
+  });
+
   it("should log error to console", function() {
-    const func = sinon.fake.returns(0);
-    const spy = sinon.spy(console, "error");
+    const func = sandbox.fake.returns(0);
+    const spy = sandbox.spy(console, "error");
     const opts = {
       logger: console,
       log: function(logger, message) {
@@ -20,8 +29,8 @@ describe("Use custom log function in options", function() {
   });
 
   it("should log different string to console", function() {
-    const func = sinon.fake.returns(0);
-    const spy = sinon.spy(console, "error");
+    const func = sandbox.fake.returns(0);
+    const spy = sandbox.spy(console, "error");
     const randomStr = "123";
     const opts = {
       logger: console,
@@ -36,8 +45,8 @@ describe("Use custom log function in options", function() {
     spy.restore();
   });
   it("should log different error to console", function() {
-    const func = sinon.fake.throws("Error");
-    const spy = sinon.spy(console, "error");
+    const func = sandbox.fake.throws("Error");
+    const spy = sandbox.spy(console, "error");
     const opts = {
       logger: console,
       logErr: function(logger, message) {

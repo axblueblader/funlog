@@ -1,56 +1,7 @@
-function wrapFunc(func, options) {
-  const logger = options.logger;
-  const log = options.log;
-
-  const preEx = options.preEx;
-  const durEx = options.durEx;
-  const postEx = options.postEx;
-  const { logErr, reThrowErr } = options;
-  return function(...args) {
-    // Function name
-    const msg = `[funlog] called ${func.name || "Anonymous function"}:`;
-    log(logger, msg);
-
-    // Input (arguments)
-    log(logger, preEx);
-    args.forEach(arg => {
-      const msg = `${typeof arg} : ${JSON.stringify(arg)}`;
-      log(logger, msg);
-    });
-
-    // Process (inner logs)
-    log(logger, durEx);
-    let output = null;
-    try {
-      output = func(...args);
-
-      // Output (result)
-      log(logger, postEx);
-      log(logger, JSON.stringify(output));
-    } catch (exception) {
-      logErr(logger, exception.message);
-      if (reThrowErr) {
-        throw exception;
-      }
-    }
-    return output;
-  };
-}
-
-function wrapObj(holder, options) {
-  const res = {};
-  Object.keys(holder).forEach(key => {
-    if (typeof holder[key] !== "function") {
-      res[key] = holder[key];
-    } else {
-      res[key] = wrapFunc(holder[key], options);
-    }
-  });
-  return res;
-}
-
 const defaultOptions = require("../src/defaultOptions");
 const parseOptions = require("../src/parseOptions");
+const wrapFunc = require("../src/wrapFunc");
+const wrapObj = require("../src/wrapObj");
 
 module.exports = function(...args) {
   if (args.length === 0) {
@@ -80,7 +31,7 @@ module.exports = function(...args) {
     return wrapFunc(func, options);
   } else if (typeof args[0] === "object") {
     obj = args[0];
-    return wrapObj(obj, options);
+    return wrapObj(obj, options, wrapFunc);
   } else {
     console.error(
       "[funlog] Error: First argument must be a function or object"
