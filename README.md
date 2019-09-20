@@ -6,7 +6,7 @@ A customizable function-focused Nodejs log wrapper: Log functions input, output 
 
 ## Motivation
 
-I wrote some handler functions for API routes and wanted automatically log out inputs and outputs of all functions inside an object. The same need arised when trying to debug an application so I decided to write this for daily usage but also for functional programming practice and for fun - hence the name `funlog`.
+I wrote some handler functions for API routes and wanted to automatically log out inputs and outputs of all functions inside an object. The same need arised when trying to debug an application, so I decided to write this for daily usage ,but also for functional programming practice and for fun as well - hence the name `funlog`.
 
 ## Quick start
 
@@ -29,8 +29,8 @@ The constructor also takes an additional options object, `log` and `logger` are 
 
 ```js
 const yourLogger = console;
-const yourLogFunction = function(logger,string) {
-    logger.log(string);
+const yourLogFunction = function(logger,message) {
+    logger.log(message);
 }
 
 const options = {
@@ -82,8 +82,8 @@ A logging function. It needs to take in 2 parameters (logger,string). This funct
 - Default value:
 
 ```js
-function(logger,string) {
-    logger.info(string);
+function(logger,message) {
+    logger.info(message);
 }
 ```
 
@@ -110,7 +110,9 @@ A message to print after execution finished and before printing function output.
 ```
 npm install funlog
 ```
+
 In source code
+
 ```js
 const funlog = require("funlog");
 ```
@@ -119,7 +121,7 @@ is enough to get going.
 
 ## Testing
 
-This project uses `Mocha`, `nyc` and `chai` for testing and coverage.
+This project uses `Mocha`, `nyc`, `sinon` and `chai` for testing and coverage.
 Simply run
 
 ```

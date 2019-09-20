@@ -1,15 +1,11 @@
 function wrapFunc(func, options) {
-  const defaultlogger = console;
-  const defaultLog = function(logger, string) {
-    logger.info(string);
-  };
+  const logger = options.logger;
+  const log = options.log;
 
-  const logger = options.logger || defaultlogger;
-  const log = options.log || defaultLog;
-
-  const preEx = options.preEx || "Input: ";
-  const durEx = options.durEx || "Process: ";
-  const postEx = options.postEx || "Output: ";
+  const preEx = options.preEx;
+  const durEx = options.durEx;
+  const postEx = options.postEx;
+  const { logErr, reThrowErr } = options;
   return function(...args) {
     // Function name
     const msg = `[funlog] called ${func.name || "Anonymous function"}:`;
@@ -24,12 +20,19 @@ function wrapFunc(func, options) {
 
     // Process (inner logs)
     log(logger, durEx);
-    const output = func(...args);
+    let output = null;
+    try {
+      output = func(...args);
 
-    // Output (result)
-    log(logger, postEx);
-    log(logger, JSON.stringify(output));
-
+      // Output (result)
+      log(logger, postEx);
+      log(logger, JSON.stringify(output));
+    } catch (exception) {
+      logErr(logger, exception.message);
+      if (reThrowErr) {
+        throw exception;
+      }
+    }
     return output;
   };
 }
@@ -46,6 +49,9 @@ function wrapObj(holder, options) {
   return res;
 }
 
+const defaultOptions = require("../src/defaultOptions");
+const parseOptions = require("../src/parseOptions");
+
 module.exports = function(...args) {
   if (args.length === 0) {
     console.error("[funlog] Error: Too few arguments");
@@ -58,14 +64,14 @@ module.exports = function(...args) {
 
   let func = null;
   let obj = null;
-  let options = {};
+  let options = defaultOptions;
 
   if (args[1]) {
     if (typeof args[1] !== "object") {
       console.error("[funlog] Error: Second argument must be an object");
       return null;
     } else {
-      options = args[1];
+      options = parseOptions(defaultOptions, args[1]);
     }
   }
 

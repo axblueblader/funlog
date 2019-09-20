@@ -1,4 +1,4 @@
-const { expect } = require("chai");
+const { expect, assert } = require("chai");
 const sinon = require("sinon");
 const funlog = require("../src/index");
 
@@ -33,7 +33,28 @@ describe("Function logging feature", function() {
     const spy = sinon.spy(console, "info");
     const name = "Anonymous function";
     res();
-    spy.calledOnceWith(`[funlog] called ${name}:`);
+    expect(spy.calledWith(`[funlog] called ${name}:`)).to.be.true;
+    spy.restore();
+  });
+
+  // Better to use basic assert for throws
+  it("should throw exception", function() {
+    const func = sinon.fake.throws("Error");
+    const res = funlog(func);
+    assert.throws(res, "Error");
+    assert.throws(func, "Error");
+  });
+
+  it("should not throw exception but only logs it", function() {
+    const func = sinon.fake.throws("Error");
+    const spy = sinon.spy(console, "error");
+    const opts = {
+      reThrowErr: false
+    };
+    const res = funlog(func, opts);
+    assert.throw(func, "Error");
+    expect(res()).to.be.null;
+    expect(spy.calledOnceWith("Error")).to.be.true;
     spy.restore();
   });
 });

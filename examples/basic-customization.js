@@ -22,8 +22,8 @@ const minus = (a, b) => {
 };
 
 opts = {
-  log: (logger, string) => {
-    logger.error(string);
+  log: (logger, message) => {
+    logger.error(message);
   }
 };
 
