@@ -8,7 +8,7 @@ A customizable function-focused Nodejs log wrapper: Log functions input, output 
 
 ## Motivation
 
-I wrote some handler functions for API routes and wanted to automatically log out inputs and outputs of all functions inside an object. The same need arised when trying to debug an application, so I decided to write this for daily usage ,but also for functional programming practice and for fun as well - hence the name `funlog`.
+I wrote some handler functions for API routes and wanted to automatically log out inputs and outputs of all functions inside an object. The same need arised when trying to debug an application, so I decided to write this for daily usage, but also for functional programming practice and for fun as well - hence the name `funlog`.
 
 ## Quick start
 
@@ -93,7 +93,7 @@ Properties in the `options` are not currently checked for types and unknown ones
 
 #### logger
 
-A logger object, something that could print to an output. It could be the console or any other logger you prefer. If it has an `info` method for printing that you can plug it in. If it doesn't you can still configure a logging function in [log](#log).
+A logger object, something that could print to an output. It could be the console or any other logger you prefer. If it has an `info` method for printing then you can plug it in. If it doesn't you can still configure a logging function in [log](#log).
 
 - Default value: `console`
 
