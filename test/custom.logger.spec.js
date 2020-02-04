@@ -15,8 +15,8 @@ describe("Use custom logger in option", function() {
     };
     const res = funlog(func, opts);
     res();
-    expect(spy.callCount).to.be.equal(5);
-    expect(spy.lastCall.calledWith(JSON.stringify(0))).to.be.true;
+    expect(spy.callCount).to.be.equal(1);
+    expect(spy.lastCall.args[0].search("[0]")).to.be.not.equal(-1);
     spy.restore();
   });
 
@@ -31,8 +31,8 @@ describe("Use custom logger in option", function() {
     };
     const res = funlog(func, opts);
     res();
-    expect(spy.callCount).to.be.equal(5);
-    expect(spy.lastCall.calledWith(JSON.stringify(0))).to.be.true;
+    expect(spy.callCount).to.be.equal(1);
+    expect(spy.lastCall.args[0].search("[0]")).to.be.not.equal(-1);
     spy.restore();
   });
 });

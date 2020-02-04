@@ -42,7 +42,7 @@ describe("Function logging feature", function() {
     const spy = sandbox.spy(console, "info");
     const name = "Anonymous function";
     res();
-    expect(spy.calledWith(`[funlog] called ${name}:`)).to.be.true;
+    expect(spy.lastCall.args[0].indexOf(name)).to.be.not.equal(-1);
     spy.restore();
   });
 
