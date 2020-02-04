@@ -3,9 +3,9 @@ module.exports = {
   log: (logger, message) => {
     logger.info(message);
   },
-  preEx: "Input: ",
-  durEx: "Process: ",
-  postEx: "Output: ",
+  preEx: "Before",
+  durEx: "During",
+  postEx: "After",
   logErr: (logger, message) => {
     logger.error(message);
   },
