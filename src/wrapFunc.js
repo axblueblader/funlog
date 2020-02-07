@@ -1,5 +1,5 @@
 module.exports = function(func, options) {
-  const { logger, log, preEx, durEx, postEx, logErr, reThrowErr } = options;
+  const { logger, log, logErr, reThrowErr } = options;
   return function(...args) {
     // Function name
 
@@ -21,7 +21,7 @@ module.exports = function(func, options) {
       }
     } finally {
       const msg = `[funlog] [${timestamp}] [${func.name ||
-        "Anonymous function"}] called with:[${argsMsg}] [${preEx}] [${durEx}] [${postEx}] output [${JSON.stringify(
+        "Anonymous function"}] called with:[${argsMsg}] output [${JSON.stringify(
         output
       )}]`;
 

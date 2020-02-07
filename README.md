@@ -26,10 +26,15 @@ Simply import and put your functions into the constructor and save it to a varia
 ```js
 const funlog = require("funlog");
 
-const func = function() {
-  console.log("Hi");
-};
-const loggedFunction = funlog(func);
+// Log a function
+function sum(a, b) {
+  return a + b;
+}
+
+const loggedSum = funlog(sum);
+loggedSum(1, 2);
+// console output:
+// [funlog] [Fri Feb 07 2020 11:16:27 GMT+0700 (Indochina Time)] [sum] called with:[number:1;number:2;] output [3]
 ```
 
 The constructor also takes an additional options object, `log` and `logger` are the most important ones (see: [options](#options)).
@@ -85,9 +90,6 @@ Properties in the `options` are not currently checked for types and unknown ones
 
 - [logger](#logger)
 - [log](#log)
-- [preEx](#preEx)
-- [durEx](#durEx)
-- [postEx](#postEx)
 - [logErr](#logErr)
 - [reThrowErr](#reThrowErr)
 
@@ -108,24 +110,6 @@ function(logger,message) {
     logger.info(message);
 }
 ```
-
-#### preEx
-
-A message to print after the function name message and before the printing the arguments.
-
-- Default value: `"Input: "`
-
-#### durEx
-
-A message to print just before the original function gets executed.
-
-- Default value: `"Process: "`
-
-#### postEx
-
-A message to print after execution finished and before printing function output.
-
-- Default value: `"Output: "`
 
 #### logErr
 
