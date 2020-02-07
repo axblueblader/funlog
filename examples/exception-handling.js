@@ -2,7 +2,7 @@ const funlog = require("../src/index");
 
 // Log exception and rethrow
 function div() {
-  throw "Error";
+  throw new Error("Error");
 }
 
 const loggedDiv = funlog(div);
